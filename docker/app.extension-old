@@ -1,0 +1,20 @@
+FROM php:7.2-fpm
+RUN apt-get update 
+RUN apt-get -y upgrade
+RUN apt-get -y install zlib1g-dev
+RUN apt-get -y install libpng-dev
+RUN apt-get -y install libc-client2007e-dev
+RUN apt-get -y install libkrb5-dev
+RUN docker-php-ext-install zip
+RUN docker-php-ext-install gd
+RUN docker-php-ext-install mysqli
+RUN docker-php-ext-install mbstring
+RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
+RUN docker-php-ext-install imap
+RUN docker-php-ext-enable zip
+RUN docker-php-ext-enable gd
+RUN docker-php-ext-enable mysqli
+RUN docker-php-ext-enable mbstring
+RUN docker-php-ext-enable imap
+RUN pecl install xdebug
+RUN docker-php-ext-enable xdebug
